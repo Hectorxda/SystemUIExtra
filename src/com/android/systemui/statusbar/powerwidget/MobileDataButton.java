@@ -26,6 +26,7 @@ public class MobileDataButton extends PowerButton {
 
     @Override
     protected void updateState() {
+        mName = R.string.Mobiledata_btn_name;
         if (STATE_CHANGE_REQUEST) {
             mIcon = R.drawable.stat_data_on;
             mState = STATE_INTERMEDIATE;

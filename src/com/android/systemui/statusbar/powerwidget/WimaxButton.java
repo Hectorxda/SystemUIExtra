@@ -107,6 +107,7 @@ public class WimaxButton extends PowerButton {
     @Override
     protected void updateState() {
         mState = sWimaxState.getTriState(mView.getContext());
+        mName = R.string.Wimax_btn_name;
         switch (mState) {
             case STATE_DISABLED:
                 mIcon = R.drawable.stat_wimax_off;

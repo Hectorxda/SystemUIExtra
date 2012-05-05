@@ -10,6 +10,7 @@ public class MediaNextButton extends MediaKeyEventButton {
 
     @Override
     protected void updateState() {
+        mName = R.string.Medianext_btn_name;
         mIcon = R.drawable.stat_media_next;
         mState = STATE_DISABLED;
     }

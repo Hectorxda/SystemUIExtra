@@ -76,6 +76,7 @@ public class SoundButton extends PowerButton {
 
     @Override
     protected void updateState() {
+        mName = R.string.Sound_btn_name;
         findCurrentState();
         switch (mRingersIndex) {
             case 0:

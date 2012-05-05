@@ -85,6 +85,7 @@ public class BrightnessButton extends PowerButton {
 
     @Override
     protected void updateState() {
+        mName = R.string.Brightness_btn_name;
         if (mAutoBrightness) {
             mIcon = R.drawable.stat_brightness_auto;
             mState = STATE_ENABLED;

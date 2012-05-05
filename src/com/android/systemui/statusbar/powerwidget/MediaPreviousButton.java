@@ -10,6 +10,7 @@ public class MediaPreviousButton extends MediaKeyEventButton {
 
     @Override
     protected void updateState() {
+        mName = R.string.Mediaprevious_btn_name;
         mIcon = R.drawable.stat_media_previous;
         mState = STATE_DISABLED;
     }

@@ -23,6 +23,7 @@ public class GPSButton extends PowerButton {
 
     @Override
     protected void updateState() {
+        mName = R.string.GPS_btn_name;
         if(getGpsState(mView.getContext())) {
             mIcon = R.drawable.stat_gps_on;
             mState = STATE_ENABLED;

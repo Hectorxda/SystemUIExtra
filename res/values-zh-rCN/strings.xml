@@ -38,4 +38,26 @@
     <string name="title_usb_accessory" msgid="4966265263465181372">"USB 配件"</string>
     <string name="label_view" msgid="6304565553218192990">"查看"</string>
     <string name="always_use_accessory" msgid="1210954576979621596">"默认情况下用于该 USB 配件"</string>
+    <!-- add button name by Hectorxda -->
+    <string name="default_btn_name">默认</string>
+    <string name="wifi_btn_name">无线</string>
+    <string name="remate_btn_name">旋转</string>
+    <string name="airplane_btn_name">飞行</string>
+    <string name="bluetooth_btn_name">蓝牙</string>
+    <string name="Brightness_btn_name">亮度</string>
+    <string name="Flashlight_btn_name">闪光灯</string>
+    <string name="GPS_btn_name">定位</string>
+    <string name="Lockscreen_btn_name">锁屏</string>
+    <string name="Mediakeyevent_btn_name">MediaKeyEvent</string>
+    <string name="Medianext_btn_name">下一首</string>
+    <string name="Mediaplaypause_btn_name">开始/暂停</string>
+    <string name="Mediaprevious_btn_name">上一首</string>
+    <string name="Mobiledata_btn_name">移动数据</string>
+    <string name="Networkmode_btn_name">网络模式</string>
+    <string name="Screentimeout_btn_name">屏幕超时</string>
+    <string name="Sleep_btn_name">睡眠</string>
+    <string name="Sound_btn_name">声音</string>
+    <string name="Sync_btn_name">同步</string>
+    <string name="WifiAp_btn_name">WifiAp</string>
+    <string name="Wimax_btn_name">Wimax</string>
 </resources>

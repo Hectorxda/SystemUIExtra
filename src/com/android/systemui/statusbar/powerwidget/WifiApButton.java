@@ -101,6 +101,7 @@ public class WifiApButton extends PowerButton {
     @Override
     protected void updateState() {
         mState = sWifiApState.getTriState(mView.getContext());
+        mName = R.string.WifiAp_btn_name;
         switch (mState) {
             case STATE_DISABLED:
                 mIcon = R.drawable.stat_wifi_ap_off;

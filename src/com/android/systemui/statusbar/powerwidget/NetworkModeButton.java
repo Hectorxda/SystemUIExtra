@@ -47,6 +47,7 @@ public class NetworkModeButton extends PowerButton{
         Context context = mView.getContext();
         NETWORK_MODE = get2G3G(context);
         mState = networkModeToState(context);
+        mName = R.string.Networkmode_btn_name;
 
         switch (mState) {
         case STATE_DISABLED:

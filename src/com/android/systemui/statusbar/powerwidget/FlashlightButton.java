@@ -22,6 +22,7 @@ public class FlashlightButton extends PowerButton {
     @Override
     protected void updateState() {
         boolean enabled = Settings.System.getInt(mView.getContext().getContentResolver(), Settings.System.TORCH_STATE, 0) == 1;
+        mName = R.string.Flashlight_btn_name;
         if(enabled) {
             mIcon = R.drawable.stat_flashlight_on;
             mState = STATE_ENABLED;

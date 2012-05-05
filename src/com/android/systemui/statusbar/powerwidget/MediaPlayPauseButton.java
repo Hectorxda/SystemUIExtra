@@ -17,6 +17,7 @@ public class MediaPlayPauseButton extends MediaKeyEventButton {
 
     @Override
     protected void updateState() {
+        mName = R.string.Mediaplaypause_btn_name;
         mState = STATE_DISABLED;
         if(isMusicActive()) {
             mIcon = R.drawable.stat_media_pause;

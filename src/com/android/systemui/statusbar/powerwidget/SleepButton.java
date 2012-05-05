@@ -15,6 +15,7 @@ public class SleepButton extends PowerButton {
     @Override
     protected void updateState() {
         mIcon = R.drawable.stat_sleep;
+        mName = R.string.Sleep_btn_name;
         mState = STATE_DISABLED;
     }
 

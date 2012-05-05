@@ -82,6 +82,7 @@ public class BluetoothButton extends PowerButton {
     @Override
     protected void updateState() {
         mState = sBluetoothState.getTriState(mView.getContext());
+        mName = R.string.bluetooth_btn_name;
         switch (mState) {
             case STATE_DISABLED:
                 mIcon = R.drawable.stat_bluetooth_off;

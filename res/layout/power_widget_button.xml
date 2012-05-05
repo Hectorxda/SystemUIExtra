@@ -17,20 +17,30 @@
 ** limitations under the License.
 */
 -->
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/power_widget_button"
+    android:background="@drawable/stat_power_bg"
+    android:clickable="true"
+    android:focusable="true">
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/power_widget_button"
-        android:orientation="vertical"
-        android:clickable="true"
-        android:focusable="true"
-        android:background="@drawable/stat_power_bg">
-    <ImageView android:id="@+id/power_widget_button_image"
-           android:layout_width="match_parent"
-            android:layout_height="0dip"
-            android:layout_weight="1"
-            android:scaleType="center" />
+    <ImageView
+        android:id="@+id/power_widget_button_image"
+        android:layout_width="match_parent"
+        android:layout_height="30dip"
+        android:scaleType="center" />
+    <!--
     <ImageView android:id="@+id/power_widget_button_indic"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:scaleType="fitXY" />
-</LinearLayout>
+    -->
+
+    <TextView
+        android:id="@+id/power_widget_button_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:singleLine="true"
+        android:layout_below="@+id/power_widget_button_image"/>
+
+</RelativeLayout>

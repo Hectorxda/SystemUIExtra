@@ -2,6 +2,7 @@ package com.android.systemui.statusbar.powerwidget;
 
 import com.android.systemui.R;
 
+import android.R.integer;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -14,6 +15,7 @@ import android.os.Message;
 import android.util.Log;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.provider.Settings;
 import android.view.View;
 import android.provider.Settings;
@@ -82,6 +84,7 @@ public abstract class PowerButton {
     private static final HashMap<String, PowerButton> BUTTONS_LOADED = new HashMap<String, PowerButton>();
 
     protected int mIcon;
+    protected int mName;
     protected int mState;
     protected View mView;
     protected String mType = BUTTON_UNKNOWN;
@@ -101,14 +104,16 @@ public abstract class PowerButton {
                     Resources res = context.getResources();
                     int buttonLayer = R.id.power_widget_button;
                     int buttonIcon = R.id.power_widget_button_image;
-                    int buttonState = R.id.power_widget_button_indic;
-                    ImageView indic = (ImageView)mView.findViewById(R.id.power_widget_button_indic);
-                    if ((Settings.System.getInt(context.getContentResolver(),Settings.System.EXPANDED_HIDE_INDICATOR, 0)) == 1){
-                        indic.setVisibility(8);
-                    }else{
-                        indic.setVisibility(0);
-                    }
+                    int buttonName = R.id.power_widget_button_name;
+                    //int buttonState = R.id.power_widget_button_indic;
+                    //ImageView indic = (ImageView)mView.findViewById(R.id.power_widget_button_indic);
+//                    if ((Settings.System.getInt(context.getContentResolver(),Settings.System.EXPANDED_HIDE_INDICATOR, 0)) == 1){
+//                        indic.setVisibility(8);
+//                    }else{
+//                        indic.setVisibility(0);
+//                    }
                     updateImageView(buttonIcon, mIcon);
+                    updateButtonName(buttonName, mName);
 
                     int sColorMaskBase = Settings.System.getInt(context.getContentResolver(),
                             Settings.System.EXPANDED_VIEW_WIDGET_COLOR, 0xFF8DE20D);
@@ -117,20 +122,20 @@ public abstract class PowerButton {
                     int sColorMaskInter = (sColorMaskBase & 0x00FFFFFF) | 0x60000000;
 
                     /* Button State */
-                    switch(mState) {
-                        case STATE_ENABLED:
-                            updateImageView(buttonState,
-                                    res.getDrawable(R.drawable.stat_bgon_custom, sColorMaskOn, MASK_MODE));
-                            break;
-                        case STATE_DISABLED:
-                            updateImageView(buttonState,
-                                    res.getDrawable(R.drawable.stat_bgon_custom, sColorMaskOff, MASK_MODE));
-                            break;
-                        default:
-                            updateImageView(buttonState,
-                                    res.getDrawable(R.drawable.stat_bgon_custom, sColorMaskInter, MASK_MODE));
-                            break;
-                    }
+//                    switch(mState) {
+//                        case STATE_ENABLED:
+//                            updateImageView(buttonState,
+//                                    res.getDrawable(R.drawable.stat_bgon_custom, sColorMaskOn, MASK_MODE));
+//                            break;
+//                        case STATE_DISABLED:
+//                            updateImageView(buttonState,
+//                                    res.getDrawable(R.drawable.stat_bgon_custom, sColorMaskOff, MASK_MODE));
+//                            break;
+//                        default:
+//                            updateImageView(buttonState,
+//                                    res.getDrawable(R.drawable.stat_bgon_custom, sColorMaskInter, MASK_MODE));
+//                            break;
+//                    }
                 }
             }
         };
@@ -184,6 +189,11 @@ public abstract class PowerButton {
         ImageView imageIcon = (ImageView)mView.findViewById(id);
         imageIcon.setImageResource(R.drawable.stat_bgon_custom);
         imageIcon.setImageDrawable(resDraw);
+    }
+    
+    private void updateButtonName(int id,int resId){
+        TextView tv = (TextView) mView.findViewById(id);
+        tv.setText(resId);
     }
 
     private View.OnClickListener mClickListener = new View.OnClickListener() {
