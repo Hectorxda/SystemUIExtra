@@ -91,7 +91,6 @@
     <string name="Flashlight_btn_name">Flashlight</string>
     <string name="GPS_btn_name">GPS</string>
     <string name="Lockscreen_btn_name">Lockscreen</string>
-    <string name="Mediakeyevent_btn_name">MediaKeyEvent</string>
     <string name="Medianext_btn_name">MediaNext</string>
     <string name="Mediaplaypause_btn_name">MediaPlayPause</string>
     <string name="Mediaprevious_btn_name">MediaPrevious</string>
@@ -103,4 +102,7 @@
     <string name="Sync_btn_name">Sync</string>
     <string name="WifiAp_btn_name">WifiAp</string>
     <string name="Wimax_btn_name">Wimax</string>
+    
+    <string name="brightlight_low">low</string>
+    <string name="brightlight_high">high</string>
 </resources>

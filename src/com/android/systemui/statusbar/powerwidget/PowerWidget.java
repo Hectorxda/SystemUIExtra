@@ -38,6 +38,7 @@ import android.widget.FrameLayout;
 import android.widget.GridView;
 import android.widget.HorizontalScrollView;
 import android.widget.LinearLayout;
+import android.widget.SeekBar;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -49,7 +50,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class PowerWidget extends FrameLayout {
+public class PowerWidget extends LinearLayout {
     private static final String TAG = "PowerWidget";
 
     public static final String BUTTON_DELIMITER = "|";
@@ -66,7 +67,7 @@ public class PowerWidget extends FrameLayout {
             + BUTTON_DELIMITER + PowerButton.BUTTON_MOBILEDATA
             + BUTTON_DELIMITER + PowerButton.BUTTON_SOUND;
 
-    private static final FrameLayout.LayoutParams WIDGET_LAYOUT_PARAMS = new FrameLayout.LayoutParams(
+    private static final LinearLayout.LayoutParams WIDGET_LAYOUT_PARAMS = new LinearLayout.LayoutParams(
             ViewGroup.LayoutParams.MATCH_PARENT, // width = match_parent
             ViewGroup.LayoutParams.WRAP_CONTENT // height = wrap_content
     );
@@ -76,9 +77,9 @@ public class PowerWidget extends FrameLayout {
             ViewGroup.LayoutParams.MATCH_PARENT, // height = match_parent
             1.0f // weight = 1
     );
-    private static final LinearLayout.LayoutParams GRIDVIEW_LAYOUT_PARAMS = new LinearLayout.LayoutParams(
-            ViewGroup.LayoutParams.WRAP_CONTENT,
-            ViewGroup.LayoutParams.WRAP_CONTENT);
+//    private static final LinearLayout.LayoutParams GRIDVIEW_LAYOUT_PARAMS = new LinearLayout.LayoutParams(
+//            ViewGroup.LayoutParams.WRAP_CONTENT,
+//            ViewGroup.LayoutParams.WRAP_CONTENT);
 
     private static final int LAYOUT_SCROLL_BUTTON_THRESHOLD = 6;
 
@@ -88,6 +89,8 @@ public class PowerWidget extends FrameLayout {
     private WidgetSettingsObserver mObserver = null;
 
     private HorizontalScrollView mScrollView;
+    
+    private SeekBar mBrightnessSeekBar;
 
     public PowerWidget(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -98,6 +101,7 @@ public class PowerWidget extends FrameLayout {
 
         // get an initial width
         updateButtonLayoutWidth();
+        setOrientation(LinearLayout.VERTICAL);
         setupWidget();
         updateVisibility();
     }
@@ -135,6 +139,7 @@ public class PowerWidget extends FrameLayout {
         Log.i(TAG, "Button list: " + buttons);
 
         //Hectorxda add 
+        
         int btnNums = 0;
         List<String> btnsList = new ArrayList<String>();
         for (String btnString : buttons.split("\\|")) {
@@ -234,6 +239,16 @@ public class PowerWidget extends FrameLayout {
 
         // set up a broadcast receiver for our intents, based off of what our
         // power buttons have been loaded
+        LinearLayout ll = new LinearLayout(mContext);
+        ll.setOrientation(LinearLayout.HORIZONTAL);
+        ll.setGravity(Gravity.CENTER_HORIZONTAL);
+        
+        View seekbar_view = mInflater.inflate(R.layout.brightness_seekbar, null, false);
+        mBrightnessSeekBar = (SeekBar)seekbar_view.findViewById(R.id.bright_seekbar);
+        ll.addView(seekbar_view,WIDGET_LAYOUT_PARAMS);
+        addView(ll,WIDGET_LAYOUT_PARAMS);
+        updateSeekbar();
+        
         setupBroadcastReceiver();
         IntentFilter filter = PowerButton.getAllBroadcastIntentFilters();
         // we add this so we can update views and such if the settings for our
@@ -249,9 +264,20 @@ public class PowerWidget extends FrameLayout {
             mObserver.observe();
         }
     }
-
+    
     public void updateWidget() {
         PowerButton.updateAllButtons();
+    }
+    
+    private void updateSeekbar(){
+        ContentResolver resolver = mContext.getContentResolver();
+        boolean mAutoBrightness = (Settings.System.getInt(resolver,
+                Settings.System.SCREEN_BRIGHTNESS_MODE, 0) == Settings.System.SCREEN_BRIGHTNESS_MODE_AUTOMATIC);
+        if(mAutoBrightness){
+            mBrightnessSeekBar.setEnabled(false);
+        }else{
+            mBrightnessSeekBar.setEnabled(true);
+        }
     }
 
     public void setupSettingsObserver(Handler handler) {
@@ -382,6 +408,8 @@ public class PowerWidget extends FrameLayout {
             } else if (uri.equals(Settings.System
                     .getUriFor(Settings.System.EXPANDED_HIDE_SCROLLBAR))) {
                 updateScrollbar();
+            } else if(uri.equals(Settings.System.getUriFor(Settings.System.SCREEN_BRIGHTNESS_MODE))){
+                updateSeekbar();
             }
 
             // do whatever the individual buttons must

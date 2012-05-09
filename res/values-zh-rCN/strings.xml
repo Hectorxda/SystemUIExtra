@@ -48,7 +48,6 @@
     <string name="Flashlight_btn_name">闪光灯</string>
     <string name="GPS_btn_name">定位</string>
     <string name="Lockscreen_btn_name">锁屏</string>
-    <string name="Mediakeyevent_btn_name">MediaKeyEvent</string>
     <string name="Medianext_btn_name">下一首</string>
     <string name="Mediaplaypause_btn_name">开始/暂停</string>
     <string name="Mediaprevious_btn_name">上一首</string>
@@ -60,4 +59,6 @@
     <string name="Sync_btn_name">同步</string>
     <string name="WifiAp_btn_name">WifiAp</string>
     <string name="Wimax_btn_name">Wimax</string>
+    <string name="brightlight_low">low</string>
+    <string name="brightlight_high">high</string>
 </resources>
