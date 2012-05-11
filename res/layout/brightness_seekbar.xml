@@ -7,13 +7,12 @@
     android:paddingBottom="25dip"
     android:paddingTop="10dip" >
 
-    <TextView
+    <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingLeft="10dip"
         android:layout_marginRight="10dip"
-        android:text="@string/brightlight_low"
-        android:textColor="#ffffff"/>
+        android:src="@drawable/stat_brightness_seek_off"/>
 
     <com.android.systemui.statusbar.powerwidget.BrightnessSeekBar
         android:id="@+id/bright_seekbar"
@@ -21,12 +20,11 @@
         android:layout_height="wrap_content"
         android:layout_weight="1" />
 
-    <TextView
+    <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingRight="10dip"
-        android:text="@string/brightlight_high" 
         android:layout_marginLeft="10dip"
-        android:textColor="#ffffff"/>
+        android:src="@drawable/stat_brightness_seek_on"/>
 
 </LinearLayout>

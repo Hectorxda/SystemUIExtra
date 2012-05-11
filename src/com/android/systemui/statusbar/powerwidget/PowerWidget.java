@@ -65,7 +65,11 @@ public class PowerWidget extends LinearLayout {
     private static final String BUTTONS_DEFAULT = PowerButton.BUTTON_WIFI
             + BUTTON_DELIMITER + PowerButton.BUTTON_AUTOROTATE
             + BUTTON_DELIMITER + PowerButton.BUTTON_MOBILEDATA
-            + BUTTON_DELIMITER + PowerButton.BUTTON_SOUND;
+            + BUTTON_DELIMITER + PowerButton.BUTTON_SOUND
+            + BUTTON_DELIMITER + PowerButton.BUTTON_BRIGHTNESS
+            + BUTTON_DELIMITER + PowerButton.BUTTON_AUTOROTATE
+            + BUTTON_DELIMITER + PowerButton.BUTTON_MOBILEDATA
+            + BUTTON_DELIMITER + PowerButton.BUTTON_AIRPLANE;
 
     private static final LinearLayout.LayoutParams WIDGET_LAYOUT_PARAMS = new LinearLayout.LayoutParams(
             ViewGroup.LayoutParams.MATCH_PARENT, // width = match_parent
@@ -91,6 +95,7 @@ public class PowerWidget extends LinearLayout {
     private HorizontalScrollView mScrollView;
     
     private SeekBar mBrightnessSeekBar;
+    private View seekbar_view;
 
     public PowerWidget(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -243,7 +248,7 @@ public class PowerWidget extends LinearLayout {
         ll.setOrientation(LinearLayout.HORIZONTAL);
         ll.setGravity(Gravity.CENTER_HORIZONTAL);
         
-        View seekbar_view = mInflater.inflate(R.layout.brightness_seekbar, null, false);
+        seekbar_view = mInflater.inflate(R.layout.brightness_seekbar, null, false);
         mBrightnessSeekBar = (SeekBar)seekbar_view.findViewById(R.id.bright_seekbar);
         ll.addView(seekbar_view,WIDGET_LAYOUT_PARAMS);
         addView(ll,WIDGET_LAYOUT_PARAMS);
@@ -274,9 +279,11 @@ public class PowerWidget extends LinearLayout {
         boolean mAutoBrightness = (Settings.System.getInt(resolver,
                 Settings.System.SCREEN_BRIGHTNESS_MODE, 0) == Settings.System.SCREEN_BRIGHTNESS_MODE_AUTOMATIC);
         if(mAutoBrightness){
-            mBrightnessSeekBar.setEnabled(false);
+            //mBrightnessSeekBar.setEnabled(false);
+            seekbar_view.setVisibility(View.GONE);
         }else{
-            mBrightnessSeekBar.setEnabled(true);
+            //mBrightnessSeekBar.setEnabled(true);
+            seekbar_view.setVisibility(View.VISIBLE);
         }
     }
 
