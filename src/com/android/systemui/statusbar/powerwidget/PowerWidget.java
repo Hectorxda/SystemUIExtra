@@ -38,6 +38,7 @@ import android.widget.FrameLayout;
 import android.widget.GridView;
 import android.widget.HorizontalScrollView;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.SeekBar;
 import android.widget.TableLayout;
 import android.widget.TableRow;
@@ -56,7 +57,6 @@ public class PowerWidget extends LinearLayout {
     public static final String BUTTON_DELIMITER = "|";
     
     public static final int BUTTONS_COLUMNS = 4;
-
     // private static final String BUTTONS_DEFAULT = PowerButton.BUTTON_WIFI
     // + BUTTON_DELIMITER + PowerButton.BUTTON_BLUETOOTH
     // + BUTTON_DELIMITER + PowerButton.BUTTON_GPS
@@ -85,14 +85,15 @@ public class PowerWidget extends LinearLayout {
 //            ViewGroup.LayoutParams.WRAP_CONTENT,
 //            ViewGroup.LayoutParams.WRAP_CONTENT);
 
-    private static final int LAYOUT_SCROLL_BUTTON_THRESHOLD = 6;
+    private static final int LAYOUT_SCROLL_BUTTON_THRESHOLD = 8;
 
     private Context mContext;
     private LayoutInflater mInflater;
     private WidgetBroadcastReceiver mBroadcastReceiver = null;
     private WidgetSettingsObserver mObserver = null;
 
-    private HorizontalScrollView mScrollView;
+    private ScrollView mScrollView;
+    
     
     private SeekBar mBrightnessSeekBar;
     private View seekbar_view;
@@ -197,7 +198,7 @@ public class PowerWidget extends LinearLayout {
 //        gv.setAdapter(adapter);
 //
 //        ll.addView(gv, GRIDVIEW_LAYOUT_PARAMS);
-        addView(tableLayout, WIDGET_LAYOUT_PARAMS);
+        //addView(tableLayout, WIDGET_LAYOUT_PARAMS);
 //        int buttonCount = 0;
 //        for (String button : buttons.split("\\|")) {
 //            Log.i(TAG, "Setting up button: " + button);
@@ -217,30 +218,36 @@ public class PowerWidget extends LinearLayout {
         
         // we determine if we're using a horizontal scroll view based on a
         // threshold of button counts
-//        if (buttonCount > LAYOUT_SCROLL_BUTTON_THRESHOLD) {
-//            // we need our horizontal scroll view to wrap the linear layout
-//            mScrollView = new HorizontalScrollView(mContext);
-//            // make the fading edge the size of a button (makes it more
-//            // noticible
-//            // that we can scroll
+        if (btnNums > LAYOUT_SCROLL_BUTTON_THRESHOLD) {
+            // we need our horizontal scroll view to wrap the linear layout
+            mScrollView = new ScrollView(mContext);
+            int scrollViewHeight = this.getResources().getInteger(R.integer.btn_scrollview_default_height);
+            LinearLayout.LayoutParams WIDGET_SCROLL_PARAMS = new LinearLayout.LayoutParams(
+                    ViewGroup.LayoutParams.MATCH_PARENT, // width = match_parent
+                    scrollViewHeight // height = wrap_content
+            );
+            // make the fading edge the size of a button (makes it more
+            // noticible
+            // that we can scroll
 //            mScrollView.setFadingEdgeLength(mContext.getResources()
 //                    .getDisplayMetrics().widthPixels
 //                    / LAYOUT_SCROLL_BUTTON_THRESHOLD);
-//            mScrollView.setScrollBarStyle(View.SCROLLBARS_INSIDE_INSET);
-//            mScrollView.setOverScrollMode(View.OVER_SCROLL_NEVER);
-//            // set the padding on the linear layout to the size of our
-//            // scrollbar,
-//            // so we don't have them overlap
+            mScrollView.setVerticalFadingEdgeEnabled(false);
+            mScrollView.setScrollBarStyle(View.SCROLLBARS_INSIDE_INSET);
+            mScrollView.setOverScrollMode(View.OVER_SCROLL_NEVER);
+            // set the padding on the linear layout to the size of our
+            // scrollbar,
+            // so we don't have them overlap
 //            ll.setPadding(ll.getPaddingLeft(), ll.getPaddingTop(),
 //                    ll.getPaddingRight(),
 //                    mScrollView.getVerticalScrollbarWidth());
-//            mScrollView.addView(ll, WIDGET_LAYOUT_PARAMS);
-//            updateScrollbar();
-//            addView(mScrollView, WIDGET_LAYOUT_PARAMS);
-//        } else {
-//            // not needed, just add the linear layout
-//            addView(ll, WIDGET_LAYOUT_PARAMS);
-//        }
+            mScrollView.addView(tableLayout, WIDGET_LAYOUT_PARAMS);
+            updateScrollbar();
+            addView(mScrollView, WIDGET_SCROLL_PARAMS);
+        } else {
+            // not needed, just add the linear layout
+            addView(tableLayout, WIDGET_LAYOUT_PARAMS);
+        }
 
         // set up a broadcast receiver for our intents, based off of what our
         // power buttons have been loaded
