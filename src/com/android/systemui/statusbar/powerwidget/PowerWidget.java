@@ -67,8 +67,8 @@ public class PowerWidget extends LinearLayout {
             + BUTTON_DELIMITER + PowerButton.BUTTON_MOBILEDATA
             + BUTTON_DELIMITER + PowerButton.BUTTON_SOUND
             + BUTTON_DELIMITER + PowerButton.BUTTON_BRIGHTNESS
-            + BUTTON_DELIMITER + PowerButton.BUTTON_AUTOROTATE
-            + BUTTON_DELIMITER + PowerButton.BUTTON_MOBILEDATA
+            + BUTTON_DELIMITER + PowerButton.BUTTON_GPS
+            + BUTTON_DELIMITER + PowerButton.BUTTON_BLUETOOTH
             + BUTTON_DELIMITER + PowerButton.BUTTON_AIRPLANE;
 
     private static final LinearLayout.LayoutParams WIDGET_LAYOUT_PARAMS = new LinearLayout.LayoutParams(
